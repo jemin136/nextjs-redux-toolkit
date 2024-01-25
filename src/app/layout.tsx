@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import ReduxProvider from "@/redux/provider";
+import Link from "next/link";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,7 +18,23 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <div>
+          <nav className="bg-gray-800 p-4">
+            <div className="container mx-auto flex items-center justify-between">
+              <div className="text-white font-semibold text-lg">My App</div>
+              <div className="flex">
+                <Link href="/users" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Users</Link>
+                <Link href="/todo" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Todo</Link>
+              </div>
+            </div>
+          </nav>
+          <ReduxProvider>
+            {children}
+          </ReduxProvider>
+        </div>
+
+      </body>
     </html>
   );
 }
